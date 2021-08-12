@@ -112,7 +112,8 @@ All Users
                                         <i class="fas fa-image ml-1"></i>
                                     </div>
                                 </div>
-                                <input type="file" name="photo" class="form-control input-custom" id="foto_user" onchange="previewFile(this)">
+                                <input type="file" name="photo" class="form-control input-custom" id="foto_user"
+                                    onchange="previewFile(this)">
                             </div>
                             @error('photo')
                                 <div class="alert alert-danger font-weight-bold alert-dismissible fade show"

@@ -29,8 +29,9 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::get('dashboard', [BlogController::class, 'dashboard']);
     Route::resource('blog', BlogController::class);
-
+    
     Route::resource('users', RegisterController::class);
+
+    Route::get('/delete/{id}', [BlogController::class, 'delete']);
+    Route::get('/delete/{id}', [RegisterController::class, 'delete']);
 });
-
-

@@ -25,14 +25,13 @@
             }
         });
     </script>
-    
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('template/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('template/assets/css/atlantis.min.css') }}">
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{ asset('template/assets/css/demo.css') }}">
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
-	@stack('link')
+    @stack('link')
 </head>
 
 <body>
@@ -45,9 +44,8 @@
             <div class="logo-header" data-background-color="blue">
 
                 <a href="#" class="logo">
-                    <img src="{{ asset('template/assets/img/logoalternatif.svg') }}" alt="navbar brand"
-                        class="navbar-brand">
-                    {{-- <div class="navbar-brand text-white">SIAKAD</div> --}}
+                    <img src="{{ asset('template/assets/img/logoalternatif.svg') }}"
+                        alt="navbar brand" class="navbar-brand">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,13 +75,13 @@
                         <h4 class="page-title">@yield('title_content')</h4>
                         @yield('breadcrumbs')
                     </div>
-                        @yield('content')
+                    @yield('content')
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Logout Modal-->
+    <!-- LOGOUT MODAL -->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -111,11 +109,14 @@
         </div>
     </div>
 
+    <!-- Ck Editor -->
     <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+
     <!--   Core JS Files   -->
     <script src="{{ asset('template/assets/js/core/jquery.3.2.1.min.js') }}"></script>
     <script src="{{ asset('template/assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('template/assets/js/core/bootstrap.min.js') }}"></script>
+
     <!-- jQuery UI -->
     <script
         src="{{ asset('template/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}">
@@ -128,79 +129,83 @@
     <script
         src="{{ asset('template/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}">
     </script>
+
     <!-- Datatables -->
     <script src="{{ asset('template/assets/js/plugin/datatables/datatables.min.js') }}">
     </script>
+
     <!-- Atlantis JS -->
     <script src="{{ asset('template/assets/js/atlantis.min.js') }}"></script>
+
     <!-- Atlantis DEMO methods, don't include it in your project! -->
     <script src="{{ asset('template/assets/js/setting-demo2.js') }}"></script>
 
-	<script>
-		const contentEle        = document.getElementById("content");
-const searchInput       = document.getElementById("searchInput");
-const foundEle          = document.getElementById('found')
-const searchBtn         = document.getElementById("searchBtn");
-const positionEle       = document.getElementById('position')
-const totalEle          = document.getElementById('total')
-const highlightsEle     = document.getElementsByClassName('highlight')
-const originalString    = contentEle.innerHTML //original content
+    <!-- Searching with highliht -->
+    <script>
+        const contentEle = document.getElementById("content");
+        const searchInput = document.getElementById("searchInput");
+        const foundEle = document.getElementById('found')
+        const searchBtn = document.getElementById("searchBtn");
+        const positionEle = document.getElementById('position')
+        const totalEle = document.getElementById('total')
+        const highlightsEle = document.getElementsByClassName('highlight')
+        const originalString = contentEle.innerHTML //original content
 
-function highlight(element, originalString, search){
-    if(search.length > 0) {
-        let regex         = new RegExp(search, "gi");
-        let newString     = originalString.replace(regex, "<span class='highlight'> " + search + "</span>")
-        element.innerHTML = newString
-    } else {
-        //tidak mencari apapun
-        element.innerHTML = originalString
-    }
-}
+        function highlight(element, originalString, search) {
+            if (search.length > 0) {
+                let regex = new RegExp(search, "gi");
+                let newString = originalString.replace(regex, "<span class='highlight'> " + search + "</span>")
+                element.innerHTML = newString
+            } else {
+                //tidak mencari apapun
+                element.innerHTML = originalString
+            }
+        }
 
-function foundWord(){ 
-    if(highlightsEle.length > 0){
-        foundEle.style.display = 'inline';
-        totalEle.innerText     = highlightsEle.length //jumlah kata yg di temukan
-        indicator(1) //default set indicator 1
-    } else {
-        foundEle.style.display = 'none';
-    }
-}
+        function foundWord() {
+            if (highlightsEle.length > 0) {
+                foundEle.style.display = 'inline';
+                totalEle.innerText = highlightsEle.length //jumlah kata yg di temukan
+                indicator(1) //default set indicator 1
+            } else {
+                foundEle.style.display = 'none';
+            }
+        }
 
-function indicator(currentPosition){
-    if(currentPosition > highlightsEle.length || currentPosition == 0){
-        return false; //kalau di akhir atau di awal pencarian tidak bisa next atau prev lagi
-    }
+        function indicator(currentPosition) {
+            if (currentPosition > highlightsEle.length || currentPosition == 0) {
+                return false; //kalau di akhir atau di awal pencarian tidak bisa next atau prev lagi
+            }
 
-    removeCurrentIndicator()
+            removeCurrentIndicator()
 
-    highlightsEle[currentPosition - 1].id  = currentPosition
-    highlightsEle[currentPosition - 1].classList.add('active');
-    positionEle.innerText      = currentPosition
-    window.location.hash    = '#' + currentPosition //move location
-}
+            highlightsEle[currentPosition - 1].id = currentPosition
+            highlightsEle[currentPosition - 1].classList.add('active');
+            positionEle.innerText = currentPosition
+            window.location.hash = '#' + currentPosition //move location
+        }
 
-function prev(){
-    indicator(parseInt(positionEle.innerText) - 1) 
-}
+        function prev() {
+            indicator(parseInt(positionEle.innerText) - 1)
+        }
 
-function next(){
-    indicator(parseInt(positionEle.innerText) + 1)  
-}
+        function next() {
+            indicator(parseInt(positionEle.innerText) + 1)
+        }
 
-function removeCurrentIndicator(currentPosition){
-  if(highlightsEle[parseInt(positionEle.innerText) - 1]){
-    highlightsEle[parseInt(positionEle.innerText) - 1].classList.remove('active');
-  }
-}
+        function removeCurrentIndicator(currentPosition) {
+            if (highlightsEle[parseInt(positionEle.innerText) - 1]) {
+                highlightsEle[parseInt(positionEle.innerText) - 1].classList.remove('active');
+            }
+        }
 
-searchBtn.addEventListener("click", function(){
-    highlight(content, originalString, searchInput.value)
-    foundWord() //hitung jumlah kata yang di temukan
-});
-	</script>
+        searchBtn.addEventListener("click", function () {
+            highlight(content, originalString, searchInput.value)
+            foundWord() //hitung jumlah kata yang di temukan
+        });
+    </script>
     @include('sweetalert::alert')
-	@stack('script')
+    @stack('script')
 </body>
 
 </html>

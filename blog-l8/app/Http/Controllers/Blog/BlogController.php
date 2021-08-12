@@ -129,28 +129,24 @@ public function update(Request $request, Blog $blog)
     }
 
     if($blog){
-        //redirect dengan pesan sukses
         Alert::success('BERHASIL', 'Data Blog Berhasil Diupdate!');
         return redirect('/blog');
     }else{
-        //redirect dengan pesan error
         Alert::warning('GAGAL', 'Data Blog Gagal Diupdate!');
         return redirect('/blog');
     }
 }
 
-    public function destroy($id)
+    public function delete($id)
     {
     $blog = Blog::findOrFail($id);
     Storage::disk('local')->delete('public/blogs/'.$blog->image);
     $blog->delete();
     
     if($blog){
-        //redirect dengan pesan sukses
-        Alert::success('BERHASIL', 'Data Blog Berhasil Dihapus!');
+        // Alert::success('BERHASIL', 'Data Blog Berhasil Dihapus!');
         return redirect('/blog');
     }else{
-        //redirect dengan pesan error
         Alert::warning('GAGAL', 'Data Blog Gagal Dihapus!');
         return redirect('/blog');
     }

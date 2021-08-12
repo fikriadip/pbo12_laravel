@@ -23,13 +23,6 @@ class LoginController extends Controller
     |
     */
 
-    // use AuthenticatesUsers;
-
-    // public function __construct()
-    // {
-    //     $this->middleware('guest');
-    // }
-
     public function showLoginForm()
     {
         return view('auth.login');

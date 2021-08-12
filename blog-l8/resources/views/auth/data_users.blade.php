@@ -79,13 +79,9 @@ All Users
                                             loading="lazy"></td>
                                     <td>{{ $usr->created_at }}</td>
                                     <td align="center">
-                                        <form action="users/{{ $usr->id }}" method="POST" style="text-align: center">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" onclick="return confirm('Yakin Ingin Menghapus?')"
-                                                class="btn btn-danger btn-sm m-1" style="font-size: 16px"><i
-                                                    class="fa fa-trash"></i></button>
-                                        </form>
+                                        <a class="btn btn-danger btn-sm m-1 text-white delete-confirmation"
+                                            data-id="{{ $usr->id }}" style="font-size: 16px"><i
+                                                class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -203,6 +199,7 @@ All Users
 </div>
 
 @push('script')
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#tableUsers').DataTable();
@@ -210,6 +207,27 @@ All Users
 
         $(document).on("click", "#btn_close", function () {
             $("#data-users").trigger("reset");
+        });
+
+        $('.delete-confirmation').click(function () {
+            var blogid = $(this).attr('data-id');
+            swal({
+                    title: "Yakin Ingin Menghapus?",
+                    text: "Anda Akan Menghapus Data User Dengan ID : " + blogid + "",
+                    icon: "warning",
+                    buttons: ["BATAL", "OK"],
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location = "/delete/" + blogid + ""
+                        swal("Data User Berhasil Dihapus!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Data Tidak Jadi Dihapus!");
+                    }
+                });
         });
     </script>
 @endpush

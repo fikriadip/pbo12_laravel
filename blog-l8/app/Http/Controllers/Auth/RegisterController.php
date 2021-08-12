@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Auth\UpdateProfileRequest;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Alert;
 
 class RegisterController extends Controller
@@ -65,11 +65,9 @@ class RegisterController extends Controller
     ]);
 
     if($user){
-        //redirect dengan pesan sukses
         Alert::success('BERHASIL', 'Data User Berhasil Disimpan!');
         return redirect('/users');
     }else{
-        //redirect dengan pesan error
         Alert::warning('GAGAL', 'Data User Gagal Disimpan!');
         return redirect('/users');
     }
@@ -116,18 +114,15 @@ public function update(UpdateProfileRequest $request)
     }
 }
 
-public function destroy($id)
+public function delete($id)
     {
       $user = User::findOrFail($id);
       Storage::disk('local')->delete('public/users/'.$user->photo);
       $user->delete();
     
       if($user){
-        //redirect dengan pesan sukses
-        Alert::success('BERHASIL', 'Data User Berhasil Dihapus!');
         return redirect('/users');
     }else{
-        //redirect dengan pesan error
         Alert::warning('GAGAL', 'Data User Gagal Dihapus!');
         return redirect('/users');
     }
