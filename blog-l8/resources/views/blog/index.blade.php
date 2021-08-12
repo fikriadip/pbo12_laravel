@@ -78,7 +78,7 @@ Blog
                                         <a href="{{ route('blog.edit', $data->id) }}"
                                             class="btn btn-primary btn-sm m-1" style="font-size: 16px"><i
                                                 class="fa fa-edit"></i></a>
-                                        <a class="btn btn-danger btn-sm m-1 text-white delete-confirmation"
+                                        <a class="btn btn-danger btn-sm m-1 text-white delete-blog"
                                             data-id="{{ $data->id }}" style="font-size: 16px"><i
                                                 class="fa fa-trash"></i></a>
                                     </td>
@@ -103,7 +103,7 @@ Blog
             $('#tableBlog').DataTable();
         });
 
-        $('.delete-confirmation').click(function () {
+        $('.delete-blog').click(function () {
             var blogid = $(this).attr('data-id');
             swal({
                     title: "Yakin Ingin Menghapus?",
@@ -114,7 +114,7 @@ Blog
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location = "/delete/" + blogid + ""
+                        window.location = "/delete/ " + blogid + ""
                         swal("Data Blog Berhasil Dihapus!", {
                             icon: "success",
                         });

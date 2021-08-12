@@ -290,104 +290,100 @@
             grid-template-columns: repeat(1, minmax(0, 1fr))
         }
 
-        @media (min-width:640px) {
-            .sm\:rounded-lg {
-                border-radius: .5rem
-            }
-
-            .sm\:block {
-                display: block
-            }
-
-            .sm\:items-center {
-                align-items: center
-            }
-
-            .sm\:justify-start {
-                justify-content: flex-start
-            }
-
-            .sm\:justify-between {
-                justify-content: space-between
-            }
-
-            .sm\:h-20 {
-                height: 5rem
-            }
-
-            .sm\:ml-0 {
-                margin-left: 0
-            }
-
-            .sm\:px-6 {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem
-            }
-
-            .sm\:pt-0 {
-                padding-top: 0
-            }
-
-            .sm\:text-left {
-                text-align: left
-            }
-
-            .sm\:text-right {
-                text-align: right
-            }
+        <blade media|%20(min-width%3A640px)%20%7B>.sm\:rounded-lg {
+            border-radius: .5rem
         }
 
-        @media (min-width:768px) {
-            .md\:border-t-0 {
-                border-top-width: 0
-            }
-
-            .md\:border-l {
-                border-left-width: 1px
-            }
-
-            .md\:grid-cols-2 {
-                grid-template-columns: repeat(2, minmax(0, 1fr))
-            }
+        .sm\:block {
+            display: block
         }
 
-        @media (min-width:1024px) {
-            .lg\:px-8 {
-                padding-left: 2rem;
-                padding-right: 2rem
-            }
+        .sm\:items-center {
+            align-items: center
         }
 
-        @media (prefers-color-scheme:dark) {
-            .dark\:bg-gray-800 {
-                --bg-opacity: 1;
-                background-color: #2d3748;
-                background-color: rgba(45, 55, 72, var(--bg-opacity))
-            }
+        .sm\:justify-start {
+            justify-content: flex-start
+        }
 
-            .dark\:bg-gray-900 {
-                --bg-opacity: 1;
-                background-color: #1a202c;
-                background-color: rgba(26, 32, 44, var(--bg-opacity))
-            }
+        .sm\:justify-between {
+            justify-content: space-between
+        }
 
-            .dark\:border-gray-700 {
-                --border-opacity: 1;
-                border-color: #4a5568;
-                border-color: rgba(74, 85, 104, var(--border-opacity))
-            }
+        .sm\:h-20 {
+            height: 5rem
+        }
 
-            .dark\:text-white {
-                --text-opacity: 1;
-                color: #fff;
-                color: rgba(255, 255, 255, var(--text-opacity))
-            }
+        .sm\:ml-0 {
+            margin-left: 0
+        }
 
-            .dark\:text-gray-400 {
-                --text-opacity: 1;
-                color: #cbd5e0;
-                color: rgba(203, 213, 224, var(--text-opacity))
-            }
+        .sm\:px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem
+        }
+
+        .sm\:pt-0 {
+            padding-top: 0
+        }
+
+        .sm\:text-left {
+            text-align: left
+        }
+
+        .sm\:text-right {
+            text-align: right
+        }
+        }
+
+        <blade media|%20(min-width%3A768px)%20%7B>.md\:border-t-0 {
+            border-top-width: 0
+        }
+
+        .md\:border-l {
+            border-left-width: 1px
+        }
+
+        .md\:grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr))
+        }
+        }
+
+        <blade media|%20(min-width%3A1024px)%20%7B>.lg\:px-8 {
+            padding-left: 2rem;
+            padding-right: 2rem
+        }
+        }
+
+        <blade media|%20(prefers-color-scheme%3Adark)%20%7B>.dark\:bg-gray-800 {
+            --bg-opacity: 1;
+            background-color: #2d3748;
+            background-color: rgba(45, 55, 72, var(--bg-opacity))
+        }
+
+        .dark\:bg-gray-900 {
+            --bg-opacity: 1;
+            background-color: #1a202c;
+            background-color: rgba(26, 32, 44, var(--bg-opacity))
+        }
+
+        .dark\:border-gray-700 {
+            --border-opacity: 1;
+            border-color: #4a5568;
+            border-color: rgba(74, 85, 104, var(--border-opacity))
+        }
+
+        .dark\:text-white {
+            --text-opacity: 1;
+            color: #fff;
+            color: rgba(255, 255, 255, var(--text-opacity))
+        }
+
+        .dark\:text-gray-400 {
+            --text-opacity: 1;
+            color: #cbd5e0;
+            color: rgba(203, 213, 224, var(--text-opacity))
+        }
         }
     </style>
 

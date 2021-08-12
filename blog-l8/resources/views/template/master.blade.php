@@ -204,6 +204,7 @@
             foundWord() //hitung jumlah kata yang di temukan
         });
     </script>
+
     @include('sweetalert::alert')
     @stack('script')
 </body>

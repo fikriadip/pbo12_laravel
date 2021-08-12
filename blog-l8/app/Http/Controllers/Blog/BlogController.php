@@ -138,17 +138,16 @@ public function update(Request $request, Blog $blog)
 }
 
     public function delete($id)
-    {
-    $blog = Blog::findOrFail($id);
-    Storage::disk('local')->delete('public/blogs/'.$blog->image);
-    $blog->delete();
-    
-    if($blog){
-        // Alert::success('BERHASIL', 'Data Blog Berhasil Dihapus!');
-        return redirect('/blog');
-    }else{
-        Alert::warning('GAGAL', 'Data Blog Gagal Dihapus!');
-        return redirect('/blog');
-    }
-    }
+        {
+        $blog = Blog::findOrFail($id);
+        Storage::disk('local')->delete('public/blogs/'.$blog->image);
+        $blog->delete();
+        
+        if($blog){
+            return redirect('/blog');
+        }else{
+            Alert::warning('GAGAL', 'Data Blog Gagal Dihapus!');
+            return redirect('/blog');
+        }
+        }
 }

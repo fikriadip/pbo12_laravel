@@ -26,12 +26,12 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::get('profile', [RegisterController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [RegisterController::class, 'update'])->name('profile.update');
-
+    
     Route::get('dashboard', [BlogController::class, 'dashboard']);
     Route::resource('blog', BlogController::class);
     
     Route::resource('users', RegisterController::class);
 
+    Route::get('/hapus/{id}', [RegisterController::class, 'hapus']);
     Route::get('/delete/{id}', [BlogController::class, 'delete']);
-    Route::get('/delete/{id}', [RegisterController::class, 'delete']);
 });

@@ -114,7 +114,7 @@ public function update(UpdateProfileRequest $request)
     }
 }
 
-public function delete($id)
+public function hapus($id)
     {
       $user = User::findOrFail($id);
       Storage::disk('local')->delete('public/users/'.$user->photo);

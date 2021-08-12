@@ -79,7 +79,7 @@ All Users
                                             loading="lazy"></td>
                                     <td>{{ $usr->created_at }}</td>
                                     <td align="center">
-                                        <a class="btn btn-danger btn-sm m-1 text-white delete-confirmation"
+                                        <a class="btn btn-danger btn-sm m-1 text-white delete-user"
                                             data-id="{{ $usr->id }}" style="font-size: 16px"><i
                                                 class="fa fa-trash"></i></a>
                                     </td>
@@ -209,18 +209,18 @@ All Users
             $("#data-users").trigger("reset");
         });
 
-        $('.delete-confirmation').click(function () {
-            var blogid = $(this).attr('data-id');
+        $('.delete-user').click(function () {
+            var userid = $(this).attr('data-id');
             swal({
                     title: "Yakin Ingin Menghapus?",
-                    text: "Anda Akan Menghapus Data User Dengan ID : " + blogid + "",
+                    text: "Anda Akan Menghapus Data User Dengan ID : " + userid + "",
                     icon: "warning",
                     buttons: ["BATAL", "OK"],
                     dangerMode: true,
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location = "/delete/" + blogid + ""
+                        window.location = "/hapus/" + userid + ""
                         swal("Data User Berhasil Dihapus!", {
                             icon: "success",
                         });

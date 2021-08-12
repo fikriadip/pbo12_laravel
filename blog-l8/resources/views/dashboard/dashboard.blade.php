@@ -1,7 +1,7 @@
 @extends('template.master')
 
 @section('title_web')
-Welcome - Siakad Starbhak
+Welcome - Your Blog
 @endsection
 
 @section('dashboard')
