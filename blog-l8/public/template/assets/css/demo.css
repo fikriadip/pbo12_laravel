@@ -100,11 +100,11 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 input[type="file"]::before {
-    content: 'UPLOAD GAMBAR';
+    content: 'UPLOAD FOTO';
     padding: 0.2rem 1rem;
     background-color: #4070f4;
     border: 2px solid #4070f4;
-    font-size: 0.90rem;
+    font-size: 0.80rem;
     color: #fff;
     line-height: 1;
     border-radius: 4px;

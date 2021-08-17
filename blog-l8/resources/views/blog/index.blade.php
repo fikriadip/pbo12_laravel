@@ -66,7 +66,7 @@ Blog
                                 <tr>
                                     <th class="text-center">{{ $loop->iteration }}</th>
                                     <td align="center"><img
-                                            src="{{ Storage::url('public/blogs/').$data->image }}"
+                                            src="{{ asset('images/blogs/'.$data->image) }}"
                                             alt="Image Blog" width="140px" class="shadow-sm rounded m-2" loading="lazy">
                                     </td>
                                     <td>{{ $data->title }}</td>

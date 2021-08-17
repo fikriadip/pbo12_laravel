@@ -57,7 +57,7 @@ Blog
                     </tr>
                     <tr>
                         <th>IMAGE CONTENT</th>
-                        <td><img src="{{ Storage::url('public/blogs/').$details->image }}"
+                        <td><img src="{{ asset('images/blogs/'.$details->image) }}"
                                 alt="Image Blog" width="200px" class="shadow-sm rounded m-2" loading="lazy"></td>
                     </tr>
                     <tr>

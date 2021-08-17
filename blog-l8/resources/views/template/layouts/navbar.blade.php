@@ -30,7 +30,7 @@
             <li class="nav-item dropdown hidden-caret">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                     <div class="avatar-sm">
-                        <img src="{{ Storage::url('public/users/').Auth::user()->photo }}"
+                        <img src="{{ asset('images/users/'.Auth::user()->photo) }}"
                             alt="Your Photo" class="avatar-img rounded-circle">
                     </div>
                 </a>

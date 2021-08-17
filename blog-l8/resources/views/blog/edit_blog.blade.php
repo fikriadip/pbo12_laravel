@@ -47,8 +47,7 @@ Blog
                     <div class="form-group">
                         <label for="image" class="font-weight-bold">EDIT GAMBAR BLOG - LEWATKAN JIKA TIDAK INGIN
                             MERUBAH</label>
-                        <input type="file" id="image"
-                            class="form-control input-custom @error('image') is-invalid @enderror" name="image"
+                        <input type="file" id="image" class="form-control input-custom" name="image"
                             onchange="previewFile(this)">
                         <!-- ERROR MESSAGE IMAGE -->
                         @error('image')
@@ -64,8 +63,7 @@ Blog
 
                     <div class="form-group">
                         <label for="title" class="font-weight-bold">EDIT JUDUL BLOG</label>
-                        <input type="text" id="title"
-                            class="form-control input-custom @error('title') is-invalid @enderror" name="title"
+                        <input type="text" id="title" class="form-control input-custom" name="title"
                             value="{{ old('title', $blog->title) }}">
                         <!-- ERROR MESSAGE TITLE -->
                         @error('title')
@@ -80,7 +78,7 @@ Blog
 
                     <div class="form-group">
                         <label for="content" class="font-weight-bold">EDIT KONTEN BLOG</label>
-                        <textarea id="content" class="form-control @error('konten') is-invalid @enderror" name="konten"
+                        <textarea id="content" class="form-control" name="konten"
                             rows="5">{{ old('konten', $blog->content) }}</textarea>
                         <!-- ERROR MESSAGE CONTENT -->
                         @error('konten')

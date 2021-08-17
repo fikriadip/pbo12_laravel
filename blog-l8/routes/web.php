@@ -22,16 +22,26 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 
 Auth::routes();
 
-Route::middleware(['web', 'auth'])->group(function () {
+Route::post('/register', [RegisterController::class, 'registerCreator']);
+
+Route::middleware(['web', 'auth', 'revalidate', 'role:admin'])->group(function () {
 
     Route::get('profile', [RegisterController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [RegisterController::class, 'update'])->name('profile.update');
     
     Route::get('dashboard', [BlogController::class, 'dashboard']);
-    Route::resource('blog', BlogController::class);
     
     Route::resource('users', RegisterController::class);
-
     Route::get('/hapus/{id}', [RegisterController::class, 'hapus']);
+});
+
+Route::middleware(['web', 'auth', 'revalidate', 'role:admin,creator'])->group(function () {
+
+    Route::get('profile', [RegisterController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile', [RegisterController::class, 'update'])->name('profile.update');
+    
+    Route::resource('blog', BlogController::class);
     Route::get('/delete/{id}', [BlogController::class, 'delete']);
 });
+
+    

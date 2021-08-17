@@ -1,7 +1,7 @@
 @extends('template.master')
 
 @section('title_web')
-Edit Data Users
+Update Profile
 @endsection
 
 @section('title_content')
@@ -25,7 +25,7 @@ All Users
         <i class="flaticon-right-arrow"></i>
     </li>
     <li class="nav-item">
-        <a href="#">Edit Data Users</a>
+        <a href="#">Update Your Profile</a>
     </li>
 </ul>
 @endsection
@@ -67,7 +67,7 @@ All Users
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
-                                        <i class="fas fa-user-tag ml-1"></i>
+                                        <i class="fas fa-address-card m-1"></i>
                                     </div>
                                 </div>
                                 <input type="text" id="name" class="form-control input-custom" name="name"

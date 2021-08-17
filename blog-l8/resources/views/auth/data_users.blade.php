@@ -50,6 +50,7 @@ All Users
                                 <th>Username</th>
                                 <th>Full Name</th>
                                 <th>Email</th>
+                                <th>Role</th>
                                 <th>Photo</th>
                                 <th>Created At</th>
                                 <th>Action</th>
@@ -61,6 +62,7 @@ All Users
                                 <th>Username</th>
                                 <th>Full Name</th>
                                 <th>Email</th>
+                                <th>Role</th>
                                 <th>Photo</th>
                                 <th>Created At</th>
                                 <th>Action</th>
@@ -73,8 +75,9 @@ All Users
                                     <td>{{ $usr->username }}</td>
                                     <td>{{ $usr->name }}</td>
                                     <td>{{ $usr->email }}</td>
+                                    <td>{{ $usr->role }}</td>
                                     <td align="center"><img
-                                            src="{{ Storage::url('public/users/').$usr->photo }}"
+                                        src="{{ asset('images/users/'.$usr->photo) }}"
                                             alt="Image Users" width="140px" class="shadow-sm rounded m-2"
                                             loading="lazy"></td>
                                     <td>{{ $usr->created_at }}</td>
@@ -136,6 +139,22 @@ All Users
                         <label for="email">Masukkan Email</label>
                         <input type="email" class="form-control" id="email" name="email">
                         @error('email')
+                            <div class="alert alert-danger font-weight-bold alert-dismissible fade show" role="alert">
+                                {{ $message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Masukkan Role</label>
+                        <select class="custom-select form-control" name="role">
+                            <option selected disabled>Pilih Role</option>
+                            <option value="admin">ADMIN</option>
+                            <option value="creator">CREATOR</option>
+                        </select>
+                        @error('role')
                             <div class="alert alert-danger font-weight-bold alert-dismissible fade show" role="alert">
                                 {{ $message }}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">

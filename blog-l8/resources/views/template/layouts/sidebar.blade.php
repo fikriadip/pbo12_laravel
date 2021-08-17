@@ -4,7 +4,7 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="{{ Storage::url('public/users/').Auth::user()->photo }}"
+                    <img src="{{ asset('images/users/'.Auth::user()->photo) }}"
                         alt="Your Photo" class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
@@ -12,7 +12,7 @@
                         <span>
                             {{ Auth::user()->name }}
                             {{-- Muhammad Fikri Adi --}}
-                            <span class="user-level">{{ Auth::user()->email }}</span>
+                            <span class="user-level text-capitalize">{{ Auth::user()->role }}</span>
                         </span>
                     </a>
                     <div class="clearfix"></div>

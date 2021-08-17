@@ -25,7 +25,7 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('auth.login-register');
     }
 
     public function login(AuthRequest $request)
@@ -33,9 +33,13 @@ class LoginController extends Controller
         $validate = $request->validated();
         $remember = $request->remember == 'on' ? true : false; // rememberme
         if (Auth::attempt($request->only('username', 'password'), $remember)) {
-                toast('Berhasil Login Welcome','success');
+            if (Auth()->user()->role == 'admin') {
+                toast('Berhasil Login Welcome Admin','success');
                 return redirect('/dashboard');
-
+            } else if (Auth()->user()->role == 'creator') {
+                toast('Berhasil Login Welcome Creator','success');
+                return redirect('/blog');
+            }
         } else {
             Alert::warning('GAGAL LOGIN', 'Periksa Kembali Username Dan Password Anda');
             return redirect('/')->withInput()->withErrors(['username' => 'Username yang anda masukkan salah','password' => 'Password yang anda masukkan salah']);

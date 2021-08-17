@@ -42,13 +42,10 @@ Blog
             </div>
             <div class="card-body">
                 <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
-
                     @csrf
-
                     <div class="form-group">
                         <label for="image" class="font-weight-bold">MASUKKAN GAMBAR BLOG</label>
-                        <input type="file" id="image"
-                            class="form-control input-custom @error('image') is-invalid @enderror" name="image"
+                        <input type="file" id="image" class="form-control input-custom" name="image"
                             onchange="previewFile(this)">
                         <!-- ERROR MESSAGE IMAGE -->
                         @error('image')
@@ -64,8 +61,7 @@ Blog
 
                     <div class="form-group">
                         <label for="title" class="font-weight-bold">MASUKKAN JUDUL BLOG</label>
-                        <input type="text" id="title"
-                            class="form-control input-custom @error('title') is-invalid @enderror" name="title"
+                        <input type="text" id="title" class="form-control input-custom" name="title"
                             value="{{ old('title') }}">
                         <!-- ERROR MESSAGE TITLE -->
                         @error('title')
@@ -80,8 +76,8 @@ Blog
 
                     <div class="form-group">
                         <label for="content" class="font-weight-bold">MASUKKAN KONTEN BLOG</label>
-                        <textarea id="content" class="form-control @error('konten') is-invalid @enderror" name="konten"
-                            rows="5" placeholder="Masukkan Konten Blog">{{ old('konten') }}</textarea>
+                        <textarea id="content" class="form-control" name="konten" rows="5"
+                            placeholder="Masukkan Konten Blog">{{ old('konten') }}</textarea>
                         <!-- ERROR MESSAGE CONTENT -->
                         @error('konten')
                             <div class="alert alert-danger font-weight-bold alert-dismissible fade show mt-2"

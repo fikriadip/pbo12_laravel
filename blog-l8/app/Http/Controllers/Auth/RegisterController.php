@@ -33,6 +33,11 @@ class RegisterController extends Controller
         return view('auth.data_users', compact('users', 'sidebar'));
     }
 
+    // public function register()
+    // {
+    //     return view('auth.register');
+    // }
+
     /**
      * Handle an incoming registration request.
      *
@@ -49,20 +54,29 @@ class RegisterController extends Controller
         'name' => 'required|string|min:5|max:150',
         'email' => 'required|string|email|max:120|unique:users',
         'password' => 'required|string|confirmed|min:8',
-        'photo'     => 'required|image|mimes:png,jpg,jpeg|max:3048',
+        'role' => 'required',
+        'photo' => 'required|image|mimes:png,jpg,jpeg|max:3048',
     ]);
 
     // UPLOAD IMAGE IN STORAGE
-    $photo = $request->file('photo');
-    $photo->storeAs('public/users', $photo->hashName());
+    // $photo = $request->file('photo');
+    // $photo->storeAs('public/users/', $photo->hashName());
+
+    // UPLOAD IMAGE IN PUBLIC
+    if ($request->photo) {
+        $photo = $request->photo;
+        $new_photo = date('YmdHis').'.'.$photo->getClientOriginalExtension();
+        $photo->move('images/users/', $new_photo);
 
     $user = User::create([
         'username' => $request->username,
         'name' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password),
-        'photo' => $photo->hashName(),
+        'role' => $request->role,
+        'photo' => $new_photo,
     ]);
+    }
 
     if($user){
         Alert::success('BERHASIL', 'Data User Berhasil Disimpan!');
@@ -73,9 +87,47 @@ class RegisterController extends Controller
     }
 }
 
+    public function registerCreator(Request $request)
+{
+    $this->validate($request, [
+        'username' => 'required|min:6|max:16',
+        'name' => 'required|string|min:5|max:150',
+        'email' => 'required|string|email|max:120|unique:users',
+        'password' => 'required|string|confirmed|min:8',
+        'photo' => 'required|image|mimes:png,jpg,jpeg|max:3048',
+    ]);
+
+    // UPLOAD IMAGE IN STORAGE
+    // $photo = $request->file('photo');
+    // $photo->storeAs('public/users/', $photo->hashName());
+
+    // UPLOAD IMAGE IN PUBLIC
+    if ($request->photo) {
+        $photo = $request->photo;
+        $new_photo = date('YmdHis').'.'.$photo->getClientOriginalExtension();
+        $photo->move('images/users/', $new_photo);
+
+    $user = User::create([
+        'username' => $request->username,
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'photo' => $new_photo,
+    ]);
+    }
+
+    if($user){
+        Alert::success('BERHASIL', 'Akun Anda Berhasil Dibuat!');
+        return redirect('/login');
+    }else{
+        Alert::warning('GAGAL', 'Akun Anda Gagal Dibuat!');
+        return redirect('/');
+    }
+}
+
 public function edit(Request $request)
 {
-    $sidebar = 'users';
+    $sidebar = 'profile';
     return view('auth.edit_profile', [
         'user' => $request->user()
     ], compact('sidebar'));
@@ -90,20 +142,28 @@ public function update(UpdateProfileRequest $request)
             );
 
         } else {
-
+            
             // DELETE OLD IMAGE FROM STORAGE
-            Storage::disk('local')->delete('public/users/'.$request->photo);
-
+            // Storage::disk('local')->delete('public/users/'.$request->photo);
+            // unlink(public_path() .  '/images/users/' . $request->photo );
+            
             // UPLOAD NEW IMAGE IN STORAGE
-            $photo = $request->file('photo');
-            $photo->storeAs('public/users', $photo->hashName());
+            // $photo = $request->file('photo');
+            // $photo->storeAs('public/users/', $photo->hashName());
 
-            $request->user()->update([
-                'username' => $request->username,
-                'name' => $request->name,
-                'email' => $request->email,
-                'photo' => $photo->hashName(),
-            ]);
+            // UPLOAD NEW IMAGE IN PUBLIC
+            if ($request->photo) {
+                $photo = $request->photo;
+                $new_photo = date('YmdHis').'.'.$photo->getClientOriginalExtension();
+                $photo->move('images/users/', $new_photo);
+                
+                $request->user()->update([
+                    'username' => $request->username,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'photo' => $new_photo,
+                ]);
+            }
 
         }
         Alert::success('BERHASIL', 'Update Profile Berhasil!');
@@ -116,9 +176,10 @@ public function update(UpdateProfileRequest $request)
 
 public function hapus($id)
     {
-      $user = User::findOrFail($id);
-      Storage::disk('local')->delete('public/users/'.$user->photo);
-      $user->delete();
+        $user = User::findOrFail($id);
+        // Storage::disk('local')->delete('public/users/'.$user->photo);
+        unlink(public_path() .  '/images/users/' . $user->photo );
+        $user->delete();
     
       if($user){
         return redirect('/users');

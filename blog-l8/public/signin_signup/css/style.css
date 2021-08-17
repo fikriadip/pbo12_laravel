@@ -60,6 +60,44 @@ form.sign-in-form {
     z-index: 2;
 }
 
+.input-custom {
+    margin-top: 15px;
+    outline: 0 none;
+}
+
+input[type="file"] {
+    color: transparent;
+    cursor: pointer;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    visibility: hidden;
+    overflow: hidden;
+    display: none;
+}
+
+input[type="file"]::before {
+    content: 'UPLOAD PICTURE';
+    padding: 0.2rem 0.5rem;
+    background-color: #4070f4;
+    border: 2px solid #4070f4;
+    font-size: 0.90rem;
+    color: #fff;
+    line-height: 1;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    /* margin: 0; */
+    margin-right: 6px;
+}
+
+input[type="file"]:hover::before {
+    background-color: #ff2626;
+    border: 2px solid #ff2626;
+    color: #fff;
+}
+
 .title {
     font-size: 2.2rem;
     color: #444;

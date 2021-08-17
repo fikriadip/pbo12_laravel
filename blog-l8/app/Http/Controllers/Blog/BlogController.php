@@ -55,14 +55,22 @@ public function store(Request $request)
     ]);
 
     // UPLOAD IMAGE IN STORAGE
-    $image = $request->file('image');
-    $image->storeAs('public/blogs', $image->hashName());
+    // $image = $request->file('image');
+    // $image->storeAs('public/blogs', $image->hashName());
 
-    $blog = Blog::create([
-        'image'     => $image->hashName(),
-        'title'     => $request->title,
-        'content'   => $request->konten
-    ]);
+
+        // UPLOAD IMAGE IN PUBLIC
+        if ($request->image) {
+            $image = $request->image;
+            $new_image = date('YmdHis').'.'.$image->getClientOriginalExtension();
+            $image->move('images/blogs/', $new_image);
+        
+        $blog = Blog::create([
+            'image'     => $new_image,
+            'title'     => $request->title,
+            'content'   => $request->konten
+        ]);
+    }
 
     if($blog){
         Alert::success('BERHASIL', 'Data Blog Berhasil Disimpan!');
@@ -113,18 +121,21 @@ public function update(Request $request, Blog $blog)
 
     } else {
 
-        // DELETE OLD IMAGE FROM STORAGE
-        Storage::disk('local')->delete('public/blogs/'.$blog->image);
+        // DELETE OLD IMAGE FROM PUBLIC
+        unlink(public_path() .  '/images/blogs/' . $blog->image );
 
-        // UPLOAD NEW IMAGE IN STORAGE
-        $image = $request->file('image');
-        $image->storeAs('public/blogs', $image->hashName());
+        // UPLOAD NEW IMAGE IN PUBLIC
+        if ($request->image) {
+            $image = $request->image;
+            $new_image = date('YmdHis').'.'.$image->getClientOriginalExtension();
+            $image->move('images/blogs/', $new_image);
 
         $blog->update([
-            'image'     => $image->hashName(),
+            'image'     => $new_image,
             'title'     => $request->title,
             'content'   => $request->konten
         ]);
+    }
 
     }
 
@@ -138,16 +149,17 @@ public function update(Request $request, Blog $blog)
 }
 
     public function delete($id)
-        {
+    {
         $blog = Blog::findOrFail($id);
-        Storage::disk('local')->delete('public/blogs/'.$blog->image);
+        // Storage::disk('local')->delete('public/blogs/'.$blog->image);
+        unlink(public_path() .  '/images/blogs/' . $blog->image );
         $blog->delete();
-        
+
         if($blog){
             return redirect('/blog');
         }else{
             Alert::warning('GAGAL', 'Data Blog Gagal Dihapus!');
             return redirect('/blog');
         }
-        }
+    }
 }
